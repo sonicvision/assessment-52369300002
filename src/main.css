@@ -59,13 +59,19 @@
   display: block;
 }
 
-.container h1 ,
+.container h1,
 .container h2 {
   padding: 20px;
 }
 
-.left, .right, .center {
+.left,
+.right,
+.center {
   display: inline-block;
   width: 260px;
   padding: 20px;
+}
+
+body {
+  font-family: "Monoton", cursive;
 }
