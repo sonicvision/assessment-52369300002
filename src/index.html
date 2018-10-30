@@ -24,9 +24,10 @@
       <li>Entry 1</li>
       <li>Entry 2</li>
       <li>
-        <form action='https://rickandmortyapi.com/api/character/'>
-          <input type='text' name='name' placeholder='Search character...'><input type='submit'>
-        </form>
+        <div>
+          <input type='text' name='name' id="nameField" placeholder='Search character...'>
+          <button id="search-name-button">Submit</button>
+        </div>
       </li>
     </ul>
   </div>
@@ -47,6 +48,8 @@
         assumenda, dolor id inventore laborum nulla provident soluta? Aliquam at consequatur inventore nihil ullam.</p>
     </div>
     <h2>Search Results</h2>
+    <div id="searchResult">
+    </div>
   </div>
   <script src="./ease.min.js"></script>
   <script src="./segment.js"></script>
