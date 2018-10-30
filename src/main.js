@@ -104,18 +104,42 @@
   };
 
   //Adding Overlay Task
-  // function revertBody() {
-  //   var bodyTag = document.getElementsByTagName("body")[0];
-  //   bodyTag.innerHTML = bodyInnerHTML;
-  // }
-  var menu = document.getElementById("menu");
-  var bodyInnerHTML = "";
 
+  var menu = document.getElementById("menu");
   function showOverlay() {
     var bodyTag = document.getElementsByTagName("body")[0];
-    bodyInnerHTML = bodyTag.innerHTML;
-    bodyTag.innerHTML =
-      '<div style="width: 100%;height: 100%;position: absolute;" onclick="revertBody()"><table style="width:100%; height: 100%""><tr><td style=" width:50%; background-color: rgb(38, 0,255)"></td><td style="width:50%; background-color: rgb(255, 0, 128)"></td></tr></table></div>';
+    // bodyTag.appendChild("DIV");
+
+    var tdNode1 = document.createElement("td");
+    tdNode1.style.width = "50%";
+    tdNode1.style.backgroundColor = "red";
+    var tdNode2 = document.createElement("td");
+    tdNode2.style.width = "50%";
+    tdNode2.style.backgroundColor = "green";
+    var trNode = document.createElement("tr");
+    trNode.appendChild(tdNode1);
+    trNode.appendChild(tdNode2);
+    var tableNode = document.createElement("table");
+    tableNode.style.height = "100%";
+    tableNode.style.width = "100%";
+    tableNode.style.borderSpacing = "0";
+    tableNode.appendChild(trNode);
+
+    var divElement = document.createElement("div");
+    divElement.style.height = "100%";
+    divElement.style.width = "100%";
+    divElement.style.position = "fixed";
+    divElement.style.top = 0;
+    divElement.style.left = 0;
+    divElement.style.right = 0;
+    divElement.style.bottom = 0;
+
+    divElement.appendChild(tableNode);
+    bodyTag.appendChild(divElement);
+
+    divElement.addEventListener("click", function() {
+      bodyTag.removeChild(divElement);
+    });
   }
   menu.children[0].children[0].onclick = function() {
     showOverlay();
@@ -148,7 +172,13 @@
       var data = JSON.parse(this.response);
       // console.log(JSON.stringify(data));
       var nameStr = "";
-      data.results.forEach(person => {
+      var topTenResults = [];
+      if (data.results.length > 10) {
+        topTenResults = data.results.splice(0, 10);
+      } else {
+        topTenResults = data.results;
+      }
+      topTenResults.forEach(person => {
         // Log each movie's title
         // console.log(person.name);
         nameStr += "<li>" + person.name + "</li>";
